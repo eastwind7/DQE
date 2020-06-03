@@ -89,7 +89,9 @@ def antycheat(user_input: str, last_user_input: str, initial_len_of_input: int, 
         print("Ты жульничаешь? Вроде в прошлый раз слово было другой длинны")
         print(f"У меня все ходы записаны. Последний вариант был таким {last_user_input} и букв там было {len(last_user_input)} .")
         corrected_input = input("Попробуй еще раз ").lower()
-
+    while corrected_input.count("_") == last_user_input.count("_"):
+        print("Ти не заповнив жодне порожнє поле, це не за правилами!")
+        corrected_input = input("Попробуй еще раз ").lower()
     differences: typing.List[bool] = [letter_check(last_user_input[i], corrected_input[i], last_letter)
                                       for i in range(initial_len_of_input)]
 
@@ -106,6 +108,11 @@ def antycheat(user_input: str, last_user_input: str, initial_len_of_input: int, 
             print("Ты жульничаешь? Вроде в прошлый раз слово было другой длинны")
             print(
                 f"У меня все ходы записаны. Последний вариант был таким {last_user_input} и букв там было {len(last_user_input)} .")
+            corrected_input = input("Попробуй еще раз ").lower()
+            continue
+
+        if corrected_input.count("_") == last_user_input.count("_"):
+            print("Ти не заповнив жодне порожнє поле, це не за правилами!")
             corrected_input = input("Попробуй еще раз ").lower()
             continue
         differences = [letter_check(last_user_input[i], corrected_input[i], last_letter)
